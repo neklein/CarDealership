@@ -1,0 +1,16 @@
+﻿@model List<CarsWithIdentity.Models.Tables.Special>
+@{
+    ViewBag.Title = "Specials";
+}
+
+<div class="container-fluid">
+    <h1>Specials</h1>
+    <div class="col-sm-12 col-sm-6">
+        @foreach (var name in Model)
+        {
+            <h4>@name.SpecialName</h4>
+            <p>This is for the special details</p><br />
+
+        }
+    </div>
+</div>

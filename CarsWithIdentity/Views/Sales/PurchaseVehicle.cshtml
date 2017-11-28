@@ -1,0 +1,115 @@
+﻿@model CarsWithIdentity.Models.PurchaseVM
+
+@{
+    ViewBag.Title = "PurchaseVehicle";
+}
+
+<h2>Purchase Vehicle</h2>
+
+<div class="container-fluid" style="border-style:solid; border-color:black;">
+    <div class="table table-responsive">
+        <table class="table">
+            <tr><th><strong>@Model.GetCarDetails.CarYear @Model.GetCarDetails.ModelName @Model.GetCarDetails.MakeName</strong></th><th></th><th></th><th></th></tr>
+            <tbody>
+                <tr>
+                    <td rowspan="3"><img src="~/Images/@Model.GetCarDetails.PicturePNG" style="width:400px; height:400px;" /></td>
+                    <td><p><strong>Body Style: </strong></p>@Model.GetCarDetails.BodyStyleName</td>
+                    <td><p><strong>Interior: </strong></p>@Model.GetCarDetails.InteriorColorName</td>
+                    <td><p><strong>Sale Price: </strong></p>@Model.GetCarDetails.SalePrice</td>
+                </tr>
+                <tr>
+                    <td><p><strong>Trans: </strong></p>@Model.GetCarDetails.TransmissionName</td>
+                    <td><p><strong>Mileage: </strong></p>@Model.GetCarDetails.CarTypeName</td>
+                    <td><p><strong>MSRP: </strong></p>@Model.GetCarDetails.MSRP</td>
+                </tr>
+                <tr>
+                    <td><p><strong>Color: </strong></p>@Model.GetCarDetails.CarColorName</td>
+                    <td><p><strong>VIN #: </strong></p>@Model.GetCarDetails.VIN</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col col-sm-3 col-sm-offset-3">
+            <p><strong>Description: </strong>@Model.GetCarDetails.CarDescription</p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        @using (Html.BeginForm("PurchaseVehicle", "Sales"))
+        {
+            <h3>Sales Information</h3>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="CustomerName">Name</label>
+                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="Phone">Phone</label>
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", })
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.PurchaseVehicleId)
+            <div class="form-group">
+                <label for="Email">Email</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="Street1">Street 1</label>
+                            @Html.TextBoxFor(m => m.Street1, new { @class = "form-control", })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="Street2">Street 2</label>
+                            @Html.TextBoxFor(m => m.Street2, new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="City">City</label>
+                            @Html.TextBoxFor(m => m.City, new { @class = "form-control", })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="State">State</label>
+                            @Html.DropDownListFor(m => m.StateId, Model.States, new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Zipcode</label>
+                    @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
+                </div><hr />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="PurchasePrice">Purchase Price</label>
+                            @Html.TextBoxFor(m => m.PurchasePrice, new { @class = "form-control", })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="PurchaseType">Purchase Type</label>
+                            @Html.DropDownListFor(m => m.PurchaseTypeId, Model.PurchaseTypes, new { @class = "form-control", })
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Save</button>
+
+        }
+    </div>
+</div>
+
+
+

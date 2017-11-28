@@ -1,0 +1,8 @@
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\bin\Debug\CarsWithIdentity.Data.dll
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\bin\Debug\CarsWithIdentity.Data.pdb
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\bin\Debug\CarsWithIdentity.Models.dll
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\bin\Debug\CarsWithIdentity.Models.pdb
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\obj\Debug\CarsWithIdentity.Data.csprojResolveAssemblyReference.cache
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\obj\Debug\CarsWithIdentity.Data.csproj.CoreCompileInputs.cache
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\obj\Debug\CarsWithIdentity.Data.dll
+C:\repos\Bitbucket\nathan-klein-individual-work\CarsWithIdentity\CarsWithIdentity.Data\obj\Debug\CarsWithIdentity.Data.pdb

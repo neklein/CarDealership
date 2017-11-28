@@ -1,0 +1,53 @@
+﻿@model CarsWithIdentity.Models.Queries.CarDetails
+
+@{
+    ViewBag.Title = "GetDetails";
+}
+
+<h2>Details</h2>
+
+
+<div class="container-fluid" style="border-style:solid; border-color:black;">
+    <div class="table table-responsive">
+        <table class="table">
+            <tr><th><strong>@Model.CarYear @Model.ModelName @Model.MakeName</strong></th><th></th><th></th><th></th></tr>
+            <tbody>
+                <tr>
+                    <td rowspan="3"><img src="~/Images/@Model.PicturePNG" style="width:400px; height:400px;"/></td>
+                    <td><p><strong>Body Style: </strong></p>@Model.BodyStyleName</td>
+                    <td><p><strong>Interior: </strong></p>@Model.InteriorColorName</td>
+                    <td><p><strong>Sale Price: </strong></p>@Model.SalePrice</td>
+                </tr>
+                <tr>
+                    <td><p><strong>Trans: </strong></p>@Model.TransmissionName</td>
+                    <td><p><strong>Mileage: </strong></p>@Model.CarTypeName</td>
+                    <td><p><strong>MSRP: </strong></p>@Model.MSRP</td>
+                </tr>
+                <tr>
+                    <td><p><strong>Color: </strong></p>@Model.CarColorName</td>
+                    <td><p><strong>VIN #: </strong></p>@Model.VIN</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col col-sm-3 col-sm-offset-3">
+            <p><strong>Description: </strong>@Model.CarDescription</p>
+        </div>
+        <div class="col col-sm-3 col-sm-offset-3">
+
+            @{
+                if (!Model.IsSold)
+                {
+                    <h2 style="color:red">SOLD</h2>
+                }
+                else
+                {
+                    <a href="@Url.Action("ContactUs", "Home", Model)" class="btn btn-danger">Contact Us</a>
+                }
+            }
+        </div>
+    </div>
+</div>
+

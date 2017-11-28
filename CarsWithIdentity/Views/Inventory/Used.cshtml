@@ -1,0 +1,134 @@
+﻿@model CarsWithIdentity.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Used";
+}
+
+<h2>Used</h2>
+<div class="container-fluid" style="border-style:solid; border-color:black;">
+    <div class="row">
+        <h5 class="col-md-12">Quick Search</h5>
+        <form id="searchForm" class="form-inline">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="quickSearch">Enter Make, Model, or Year</label>
+                    <input type="text" class="form-control" id="quickSearch" placeholder="Enter make, model, or year" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <p>Price</p>
+                    @Html.DropDownListFor(m => m.MinPrice,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem{Text="$1000", Value="1000"},
+                            new SelectListItem{Text="$10,000", Value="10000"},
+                            new SelectListItem{Text="$20,000", Value="20000"}
+                        },
+                        "No Min",
+                        new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.MaxPrice,
+                       new List<SelectListItem>
+                       {
+                            new SelectListItem { Text="$20,000", Value="20000" },
+                            new SelectListItem { Text="$40,000", Value="40000" },
+                            new SelectListItem { Text="$80,000", Value="80000" },
+                       },
+                       "No Max",
+                       new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <p>Year</p>
+                    @Html.DropDownListFor(m => m.MinYear,
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem{Text="1990", Value="1990"},
+                            new SelectListItem{Text="2000", Value="2000"},
+                            new SelectListItem{Text="2010", Value="2010"}
+                        },
+                        "No Min",
+                        new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.MaxYear,
+                       new List<SelectListItem>
+                       {
+                            new SelectListItem { Text="2000", Value="2000" },
+                            new SelectListItem { Text="2005", Value="2005" },
+                            new SelectListItem { Text="2015", Value="2015" },
+                       },
+                       "No Max",
+                       new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" onclick="search()" class="btn btn-default" style="align-self:center">Search</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+<h2>Search Results</h2>
+<div class="container-fluid" style="border-style:solid; border-color:black;">
+    <div class="row">
+        <div class="col-md-12" id="searchResults">
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+            var params;
+            var imagePath = '@Url.Content("~/Images/")';
+            var detailsPath = '@Url.Action("GetDetails", "Inventory")/';
+
+            params = 'minPrice=' + $('#MinPrice').val() + '&maxPrice=' + $('#MaxPrice').val() + '&minYear=' +
+                $('#MinYear').val() + '&maxYear=' + $('#MaxYear').val() + '&searchTerm=' + $('#quickSearch').val();
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:60754/api/Inventory/SearchUsed?' + params,
+                success: function (results) {
+                    $('#searchResults').empty();
+
+                    $.each(results, function (index, searchResults) {
+                        var html = '<div class="col-xs-12 col-sm-6 col-md-4">' +
+                            '<p class="foundCar"><img src="' + imagePath + searchResults.PicturePNG + '" style="width:200px; height:200px;"/></p>' +
+                            '<p class="foundCar"><strong>' + searchResults.CarYear + ' ' + searchResults.MakeName + ' '
+                            + searchResults.ModelName + '</strong></p>' +
+                            '<table class="table"><tbody><tr><td class="foundCar"><strong>Body Style: </strong>' + searchResults.BodyStyleName + '</td>' +
+                            '<td class="foundCar"><strong>Interior: </strong>' + searchResults.InteriorColorName + '</td>' +
+                            '<td class="foundCar"><strong>Sale Price: </strong>' + searchResults.SalePrice + '</td></tr > ' +
+                            '<tr><td class="foundCar"><strong>Trans: </strong>' + searchResults.TransmissionName + '</td>' +
+                            '<td class="foundCar"><strong>Mileage: </strong>' + searchResults.CarTypeName + '</td>' +
+                            '<td class="foundCar"><strong>MSRP: </strong>' + searchResults.MSRP + '</td></tr>' +
+                            '<tr><td class="foundCar"><strong>Color: </strong>' + searchResults.CarColorName + '</td>' +
+                            '<td class="foundCar"><strong>VIN #: </strong>' + searchResults.VIN + '</td>' +
+                            '<td class="foundCar"><a href="' + detailsPath + searchResults.CarId + '">view details</a></td></tr>'
+                        '</tbody ></table > '
+                        '</div>';
+
+                        $('#searchResults').append(html.toString());
+                    });
+
+                },
+                error: function () {
+                    alert('Error performing search, try again later!')
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
